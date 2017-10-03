@@ -1,0 +1,19 @@
+<setup>
+  <block title="Custom Alerts">
+        <text>Configure TheHive Server Settings</text>
+    </block>
+    <block title="Server" endpoint="admin/alert_actions" entity="alert_thehive">
+        <input field="param.url">
+            <label>Server URL</label>
+            <type>text</type>
+        </input>
+        <input field="param.username">
+            <label>TheHive Username</label>
+            <type>text</type>
+        </input>
+        <input field="param.password">
+            <label>TheHive Password</label>
+            <type>text</type>
+        </input>
+    </block>
+</setup>

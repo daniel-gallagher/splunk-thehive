@@ -1,0 +1,27 @@
+<form class="form-horizontal form-complex">
+    <div class="control-group">
+        <label class="control-label" for="title">Title</label>
+        <div class="controls">
+            <textarea type="text" name="action.alert_thehive.param.title" id="title" />
+            <span class="help-block">
+                Enter a title for the case. Include tokens that will resolve to text based on search results.
+                <a href="{{SPLUNKWEB_URL_PREFIX}}/help?location=learnmore.alert.action.tokens" target="_blank"
+                   title="Splunk help">Learn More <i class="icon-external"></i></a>
+            </span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="owner">User Name</label>
+        <div class="controls">
+            <input type="text" name="action.alert_thehive.param.owner" id="owner" />
+            <span class="help-block">Enter a user name who will own the case.</span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="tlp">TLP</label>
+        <div class="controls">
+            <input type="text" name="action.alert_thehive.param.tlp" id="tlp" />
+            <span class="help-block">Enter a TLP value (0-3).</span>
+        </div>
+    </div>
+</form>

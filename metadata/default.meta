@@ -1,0 +1,8 @@
+[]
+access = read : [ * ], write : [ admin ]
+
+[alert_actions/alert_thehive]
+export = system
+
+[alerts]
+export = system
