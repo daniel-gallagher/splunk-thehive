@@ -12,7 +12,6 @@
 
 [alert_thehive]
 param.url = <string>
-param.username = <string>
-param.password = <string>
+param.api_key = <string>
 param.accept = <string>
 param.content_type = <string>

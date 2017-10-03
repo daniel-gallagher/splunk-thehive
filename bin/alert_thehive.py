@@ -10,13 +10,13 @@ from subprocess import call
 from thehiveapi.api import TheHiveApi
 from thehiveapi.models import Alert, AlertArtifact, Case, CaseObservable
 
+
 def get_config(csv_rows, config):
 
     url = config.get('url') # Get TheHive URL from Splunk configuration
-    username = config.get('username') # Get TheHive username from Splunk configuration
-    password = config.get('password') # Get TheHive password from Splunk configuration
+    api_key = config.get('api_key') # Get TheHive API key from Splunk configuration
 
-    api = TheHiveApi(url, username, password, {'http': '', 'https': ''})
+    api = TheHiveApi(url, api_key, {'http': '', 'https': ''})
 
     # Get the payload for the case from the config, use defaults if they are not specified
     payload = json.dumps(dict(
