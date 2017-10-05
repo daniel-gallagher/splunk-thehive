@@ -1,0 +1,41 @@
+Basic json format to create TheHive event
+
+#Create case
+{
+    "description": "N/A",
+    "flag": false,
+    "metrics": {},
+    "severity": 2,
+    "startDate": 1503935494000,
+    "tags": [
+        "thehive4py"
+    ],
+    "tasks": [],
+    "title": "From TheHive4Py based on the Phishing template",
+    "tlp": 2
+}
+
+#Create filename observable
+{
+    "data": [
+        "pic.png"
+    ],
+    "dataType": "filename",
+    "ioc": true,
+    "message": "test",
+    "tags": [
+        "thehive4py"
+    ],
+    "tlp": 1
+}
+
+#Create file observable
+{
+  "dataType": "file",
+  "message": "test",
+  "tlp": 1,
+  "ioc": true,
+  "tags": [
+    "thehive4py"
+  ]
+}
