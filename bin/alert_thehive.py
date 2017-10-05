@@ -16,7 +16,7 @@ def get_config(csv_rows, config):
     url = config.get('url') # Get TheHive URL from Splunk configuration
     api_key = config.get('api_key') # Get TheHive API key from Splunk configuration
 
-    api = TheHiveApi(url, api_key, {'http': '', 'https': ''})
+    api = TheHiveApi(url, api_key)
 
     # Get the payload for the case from the config, use defaults if they are not specified
     payload = json.dumps(dict(
