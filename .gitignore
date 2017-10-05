@@ -1,4 +1,18 @@
+# Splunk app local files
+local
+# (Normally we'd exclude the entire "metadata" directory.
+#  However we must preserve metadata/default.meta so that eventgen works.)
+local.meta
 
+# OS X
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Python
+*.pyo
+*.pyc
 
 # Built files
 *.spl
