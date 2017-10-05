@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<form class="form-horizontal form-complex">
+  <div class="control-group">
+      <label class="control-label" for="splunk_thehive_title">Title</label>
+      <div class="controls">
+          <input type="text" name="action.splunk_thehive.param.title" id="splunk_thehive_title" required></text>
+          <span class="help-block">
+            The title to use for created cases.
+          </span>
+      </div>
+  </div>
+  <div class="control-group">
+      <label class="control-label" for="splunk_thehive_description">Description</label>
+      <div class="controls">
+          <textarea name="action.splunk_thehive.param.description" id="splunk_thehive_description" required></textarea>
+          <span class="help-block">
+              The description to send with the case.
+          </span>
+      </div>
+  </div>
+  <div class="control-group">
+      <label class="control-label" for="splunk_thehive_severity">Severity</label>
+      <div class="controls">
+          <select id="splunk_thehive_severity" name="action.splunk_thehive.param.severity">
+              <option value="1">Low</option>
+              <option value="2">Medium</option>
+              <option value="3">High</option>
+          </select>
+          <span class="help-block">Change the severity of the created case.</span>
+      </div>
+  </div>
+  <div class="control-group">
+      <label class="control-label" for="splunk_thehive_owner">Owner</label>
+      <div class="controls">
+          <input type="text" name="action.splunk_thehive.param.owner" id="splunk_thehive_owner" />
+          <span class="help-block">
+            The case owner. Defaults to user name that creates the case.
+          </span>
+      </div>
+  </div>
+  <div class="control-group">
+      <label class="control-label" for="splunk_thehive_tlp">TLP</label>
+      <div class="controls">
+          <select id="splunk_thehive_tlp" name="action.splunk_thehive.param.tlp">
+              <option value="-1">None</option>
+              <option value="0">White</option>
+              <option value="1">Green</option>
+              <option value="2">Amber</option>
+              <option value="3">Red</option>
+          </select>
+          <span class="help-block">Change the TLP of the created case.</span>
+      </div>
+  </div>
+  <div class="control-group">
+      <label class="control-label" for="splunk_thehive_tags">Tags</label>
+      <div class="controls">
+          <input type="text" name="action.splunk_thehive.param.tags" id="splunk_thehive_tags" />
+          <span class="help-block">
+              Use single comma-separated string without quotes for multiple tags (ex. "badIP,spam").
+          </span>
+      </div>
+  </div>
+</form>
