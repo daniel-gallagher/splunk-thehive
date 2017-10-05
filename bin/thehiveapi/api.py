@@ -34,7 +34,7 @@ class TheHiveApi:
         :param password: The password for basic authentication or None. Defaults to None
     """
 
-    def __init__(self, url, principal, password=None, proxies={}, cert=True):
+    def __init__(self, url, principal, password=None, proxies={}, cert=False):
 
         self.url = url
         self.principal = principal
