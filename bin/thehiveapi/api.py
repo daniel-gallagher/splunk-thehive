@@ -6,7 +6,6 @@ import os
 import warnings
 import json
 import requests
-#import magic
 
 from requests.auth import AuthBase
 
@@ -124,7 +123,7 @@ class TheHiveApi:
         data = {'_json': json.dumps({"message":case_task_log.message})}
 
         if case_task_log.file:
-            f = {'attachment': (os.path.basename(case_task_log.file), open(case_task_log.file, 'rb'), magic.Magic(mime=True).from_file(case_task_log.file))}
+            f = {'attachment': (os.path.basename(case_task_log.file), open(case_task_log.file, 'rb'))}
             try:
                 return requests.post(req, data=data,files=f, proxies=self.proxies, auth=self.auth, verify=self.cert)
             except requests.exceptions.RequestException as e:

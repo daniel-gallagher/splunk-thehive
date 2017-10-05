@@ -5,7 +5,7 @@ import json
 import time
 import os
 import base64
-#import magic
+
 
 from future.utils import raise_with_traceback
 
@@ -144,7 +144,7 @@ class CaseObservable(JSONSerializable):
 
         data = attributes.get('data', [])
         if self.dataType == 'file':
-            self.data = [{'attachment': (os.path.basename(data[0]), open(data[0], 'rb'), magic.Magic(mime=True).from_file(data[0]))}]
+            self.data = [{'attachment': (os.path.basename(data[0]), open(data[0], 'rb'))}]
         else:
             self.data = data
 
@@ -193,7 +193,6 @@ class AlertArtifact(JSONSerializable):
     def _prepare_file_data(self, file_path):
         with open(file_path, "rb") as file_artifact:
             filename = os.path.basename(file_path)
-            mime = magic.Magic(mime=True).from_file(file_path)
             encoded_string = base64.b64encode(file_artifact.read())
 
         return "{};{};{}".format(filename, mime, encoded_string.decode())
