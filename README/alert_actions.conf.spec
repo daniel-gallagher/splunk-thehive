@@ -10,7 +10,7 @@
 # NOTE: This file and the corresponding setup.xml file are
 # optional components.
 
-[alert_thehive]
+[splunk_thehive]
 param.url = <string>
 param.api_key = <string>
 param.accept = <string>

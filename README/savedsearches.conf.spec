@@ -13,11 +13,11 @@
 
 # Enable/disable alertaction notification
 # action.<alertaction_name> = [0|1]
-action.alert_thehive = 1
+action.splunk_thehive = 1
 
 # action.<alertaction_name>.param.<key> = <type> (e.g. <string>)
-action.alert_thehive.param.title = <string>
-action.alert_thehive.param.description = <string>
-action.alert_thehive.param.owner = <string>
-action.alert_thehive.param.status = <string>
-action.alert_thehive.param.tlp = <string>
+action.splunk_thehive.param.title = <string>
+action.splunk_thehive.param.description = <string>
+action.splunk_thehive.param.owner = <string>
+action.splunk_thehive.param.status = <string>
+action.splunk_thehive.param.tlp = <string>

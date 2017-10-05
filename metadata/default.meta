@@ -1,7 +1,7 @@
 []
 access = read : [ * ], write : [ admin ]
 
-[alert_actions/alert_thehive]
+[alert_actions/splunk_thehive]
 export = system
 
 [alerts]
