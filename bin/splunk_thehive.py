@@ -11,7 +11,7 @@ from thehiveapi.api import TheHiveApi
 from thehiveapi.models import Alert, AlertArtifact, Case, CaseObservable
 
 
-def get_config(csv_rows, config):
+def get_config(config, csv_rows):
 
     url = config.get('url') # Get TheHive URL from Splunk configuration
     api_key = config.get('api_key') # Get TheHive API key from Splunk configuration
@@ -19,31 +19,16 @@ def get_config(csv_rows, config):
     api = TheHiveApi(url, api_key)
 
     # Get the payload for the case from the config, use defaults if they are not specified
-    payload = json.dumps(dict(
-        title = config.get('title'),
-        description = config.get('description', "No description provided."),
-        severity = int(config.get('severity', 1)),
-        owner = config.get('owner'),
-        tlp = int(config.get('tlp', 2)),
-        tags = [] if config.get('tags') is None else config.get('tags').split(",")
-    ))
+    title = config.get('title')
+    description = config.get('description', "No description provided.")
+    severity = int(config.get('severity', 1))
+    owner = config.get('owner')
+    tlp = int(config.get('tlp', 2))
+    tags = [] if config.get('tags') is None else config.get('tags').split(",")
 
-    print >> sys.stderr, 'INFO csv_rows="%s"' % (csv_rows)
+    create_case(api, title, description, tlp, tags, csv_rows)
 
-    # Filter empty multivalue fields
-    parsed_rows = {key: value for key, value in csv_rows.iteritems() if not key.startswith("__mv_")}
-    print >> sys.stderr, 'INFO parsed_rows="%s"' % (parsed_rows)
-
-    artifacts = []
-    for key, value in parsed_rows.iteritems():
-        artifacts.append(dict(
-            dataType = key,
-            data = value
-        ))
-
-    print >> sys.stderr, 'INFO Artifacts="%s"' % (artifacts)
-
-def create_case():
+def create_case(api, title, description, tlp, tags, csv_rows):
 
     print('Create case')
     print('-----------------------------')
@@ -56,25 +41,36 @@ def create_case():
         print('')
         id = response.json()['id']
     else:
-        print('ko: {}/{}'.format(response.status_code, response.text))
+        print('Error: {} - {}'.format(response.status_code, response.text))
         sys.exit(0)
 
-    return(id)
+    create_observable(api, id, csv_rows)
 
-def create_observable(id):
+def create_observable(api, id, csv_rows):
+
+    # Filter empty multivalue fields
+    parsed_rows = {key: value for key, value in csv_rows.iteritems() if not key.startswith("__mv_")}
 
     print('Create observable')
     print('-----------------------------')
-    observ = CaseObservable(artifacts=artifacts,
-                            tags=['Splunk']
-                            )
-    response = api.create_case_observable(id, observ)
-    if response.status_code == 201:
-        print(json.dumps(response.json(), indent=4, sort_keys=True))
-        print('')
-    else:
-        print('ko: {}/{}'.format(response.status_code, response.text))
-        sys.exit(0)
+
+    for (key, value) in parsed_rows.items():
+        observ = CaseObservable(dataType=key,
+                                data=[value],
+                                tlp=1,
+                                ioc=True,
+                                tags=['Splunk'],
+                                message='test'
+                                )
+        print(observ)
+
+        response = api.create_case_observable(id, observ)
+        if response.status_code == 201:
+            print(json.dumps(response.json(), indent=4, sort_keys=True))
+            print('')
+        else:
+            print('ko: {}/{}'.format(response.status_code, response.text))
+            sys.exit(0)
 
 if __name__ == "__main__":
     if len(sys.argv) > 1 and sys.argv[1] == "--execute": # make sure we have the right number of arguments - more than 1; and first argument is "--execute"
@@ -86,7 +82,7 @@ if __name__ == "__main__":
                 with gzip.open(results_file) as file: # open the file with gzip lib, start making alerts
                     reader = csv.DictReader(file)
                     for csv_rows in reader:
-                        get_config(csv_rows, config) # make the alert with predefined function; fail gracefully
+                        get_config(config, csv_rows) # make the alert with predefined function; fail gracefully
                 sys.exit(0)
             except IOError as e:
                 print >> sys.stderr, "FATAL Results file exists but could not be opened/read"
