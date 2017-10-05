@@ -1,23 +1,31 @@
-# Add as many param entries here as correspond to user input options
-# defined in your Alert Action HTML.  Each key's name will correspond to
-# each input element's "name" parameter.  For example:
-# In alertaction.html:
-#   <input id="example_input" type="text" name="action.alertaction_template.param.example_input" />
-#
-# And the corresponding entry in savedsearches.conf.spec:
-#   action.alertaction_template.param.example_input = <string>
+# splunk_thehive event settings
 
-# The values defined here will apply to an individual Alert Action,
-# as opposed to values defined in alert_actions.conf.spec, which apply
-# to all created Alert Actions of this type.
+action.splunk_thehive = [0|1]
+* Enable thehive_create_case notification
 
-# Enable/disable alertaction notification
-# action.<alertaction_name> = [0|1]
-action.splunk_thehive = 1
-
-# action.<alertaction_name>.param.<key> = <type> (e.g. <string>)
 action.splunk_thehive.param.title = <string>
+* Case Title to use in TheHive.
+* (required)
+
 action.splunk_thehive.param.description = <string>
+* The description of the case to send to TheHive.
+* (required)
+
+action.splunk_thehive.param.severity = [0|1|2|3]
+* The severity of the new case. 1 = low, 2 = medium, 3 = high
+* Default is "1" (low)
+* (optional)
+
 action.splunk_thehive.param.owner = <string>
-action.splunk_thehive.param.status = <string>
-action.splunk_thehive.param.tlp = <string>
+* Case owner. Defaults to user name that creates the case.
+* (optional)
+
+action.splunk_thehive.param.tlp = [-1|0|1|2|3]
+* Traffic Light Protocol for this case. 0 = White, 1 = Green, 2 = Amber, 3 = Red
+* TLP affects releasability of information. Some analyzers will not be available on higher TLP settings.
+* Defaults to "2" (Amber)
+* (optional)
+
+action.splunk_thehive.param.tags = <string>
+* The tags to put on the case. Use a single, comma-separated string (ex. "badIP,trojan").
+* (optional)
