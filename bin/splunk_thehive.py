@@ -57,10 +57,8 @@ def create_observable(api, id, csv_rows):
     for (key, value) in parsed_rows.items():
         observ = CaseObservable(dataType=key,
                                 data=[value],
-                                tlp=1,
-                                ioc=True,
                                 tags=['Splunk'],
-                                message='test'
+                                message='Created automatically by Splunk'
                                 )
         print(observ)
 
