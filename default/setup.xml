@@ -7,12 +7,8 @@
             <label>Server URL (ex. https://server.com:9443)</label>
             <type>text</type>
         </input>
-        <input field="param.username">
-            <label>TheHive Username</label>
-            <type>text</type>
-        </input>
-        <input field="param.password">
-            <label>TheHive Password</label>
+        <input field="param.api_key">
+            <label>TheHive API Key</label>
             <type>text</type>
         </input>
     </block>
